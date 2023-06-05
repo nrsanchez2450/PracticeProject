@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="To-Do App">
     <AddTask item= {getItem}/>
-  {task && task.map(task =>(
-    <Item todo = {task}/>
+  {task && task.map((task, index) =>(
+    <Item id={index} todo = {task}/>
        ))}
       <header className="App-header">
     <h1> To-Do List </h1>
