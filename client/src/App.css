@@ -7,11 +7,19 @@
 }
 
 .submit{
-  
+  padding: 5px 5px;
+  text-align: center;
+  font size: 12px;
+  text-color: white;
+  background-color: green;
 }
 
 .onClick{
-  
+  padding: 5px 5px;
+  text-align: center;
+  font size: 12px;
+  text-color: white;
+  background-color: purple;
 }
 
 
