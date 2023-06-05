@@ -5,7 +5,7 @@ https://www.figma.com/file/CPSCGySCYgadJ7fjg3LL9g/Todo-List?type=design&node-id=
 
 - React
 - Typescript
-- Vite
+- Vite 
 - MUI (React component library)
 - Redux Toolkit (State management)
 - Redux Toolkit Query (Data fetching and caching tool)
