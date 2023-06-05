@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Item = () => {
+const Item = (props) => {
   return (
     <div className= 'todo-item'>
       <input type = "checkbox" textDecoration: 'line-through' onChange={() =>  props.completed(props.id)}/>
