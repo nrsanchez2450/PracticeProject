@@ -1,6 +1,5 @@
 import './App.css';
-import './AddTask.jsx';
-import './Item.jsx';
+
 import { useState } from 'react';
 
 function App() {
