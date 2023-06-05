@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import {useContext} from 'react';
 import React from 'react;
 
 const DeleteAll() = (props) => {
-  const [item, deleteItem]  = useState("")
+  const [item, deleteItem]  = useContext("")
+  }
 
 
 
