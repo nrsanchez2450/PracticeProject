@@ -12,11 +12,15 @@ function App() {
     })
   }
   
+  const getCompleted = (id) => {
+    console.log(id);
+  }
+  
   return (
     <div className="To-Do App">
     <AddTask item= {getItem}/>
   {task && task.map((task, index) =>(
-    <Item id={index} todo = {task}/>
+    <Item id={index} todo = {task} completed= {getCompleted}/>
        ))}
       <header className="App-header">
     <h1> To-Do List </h1>
