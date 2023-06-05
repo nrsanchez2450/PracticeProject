@@ -6,7 +6,7 @@ import { useState } from 'react';
 function App() {
   const [task, setTask] = useState([])
   
-  const  getItem =  (item)  => {
+  const getItem =  (item)  => {
     setTask((prevState) =>{
       return [...prevState, item]
     })
@@ -18,6 +18,9 @@ function App() {
         return index !== id;
         ))
     })
+    
+      
+    
   }
   
   return (
