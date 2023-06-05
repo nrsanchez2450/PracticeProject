@@ -20,4 +20,4 @@ const AddTodo() = (props) => {
     </form>
     )
   }
-export fault  AddTodo
+export fault  AddTodo;
