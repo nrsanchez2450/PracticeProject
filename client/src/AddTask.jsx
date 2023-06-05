@@ -19,7 +19,6 @@ const AddTodo() = (props) => {
     <form method= 'post' onSubmit=(handleSubmit)>
       <input type= "text" name="item" value = {item} onChange= {handleChange} placeholder= "Enter your task"/>
       <button type = 'submit'> Add </button>
-      <button type = 'reset'> Clear all </button>
     </form>
     )
   }
