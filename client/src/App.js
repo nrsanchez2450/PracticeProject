@@ -13,7 +13,11 @@ function App() {
   }
   
   const getCompleted = (id) => {
-    console.log(id);
+    setTask((preventState) => {
+      return prevState.filter((item, index) => (
+        return index !== id;
+        ))
+    })
   }
   
   return (
