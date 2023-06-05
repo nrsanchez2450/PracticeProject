@@ -17,7 +17,8 @@ const AddTodo() = (props) => {
     <form method= 'post' onSubmit=(handleSubmit)>
       <input type= "text" name="text" value = {item} onChange= {handleChange} placeholder= "Enter your task"/>
       <button type = 'submit'> Add </button>
+      <button type = 'submit'> Clear all tasks </button>
     </form>
     )
   }
-export fault  AddTodo;
+export fault AddTodo;
