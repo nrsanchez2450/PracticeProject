@@ -5,6 +5,7 @@ function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
+const [checked, setChecked] = useState(false);
   
   
  const addItem = () => {
