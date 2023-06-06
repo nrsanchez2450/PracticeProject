@@ -5,7 +5,6 @@ function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
-const [checked, setChecked] = useState(false);
   
   
  const addItem = () => {
@@ -31,6 +30,7 @@ const [checked, setChecked] = useState(false);
   
   return (
       <div className="To-Do App">
+    <div className = "intuative-checkbox">
       <header className="App-header">
         <h1> To-Do List</h1>
     
@@ -46,6 +46,7 @@ const [checked, setChecked] = useState(false);
           })}
         </ul>
       </header>
+    </div>
     </div>
     
     );
