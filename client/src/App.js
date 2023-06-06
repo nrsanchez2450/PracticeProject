@@ -29,7 +29,7 @@ const[items, setItems] = useState([]);
   
   return (
     <div className = "addTasks">
-      <input type = "checkbox" placeholder = "Enter task" value = {newItem}
+      <input type = "text" placeholder = "Enter task" value = {newItem}
         onChange= {(e) => setNewItem(e.target.value)}/>
       <button type = "submit" onClick= {() => addItem()}> Add </button>
 
