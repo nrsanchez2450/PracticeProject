@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
 
-function () {
+function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
+  
   
  const addItem = () => {
     
@@ -28,7 +29,10 @@ const[items, setItems] = useState([]);
       console.log(items);
   
   return (
-    <div className = "addTasks">
+      <div className="To-Do App">
+      <header className="App-header">
+        <h1> To-Do List</h1>
+    
       <input type = "text" placeholder = "Enter task" value = {newItem}
         onChange= {(e) => setNewItem(e.target.value)}/>
       <button type = "submit" onClick= {() => addItem()}> Add </button>
@@ -36,13 +40,14 @@ const[items, setItems] = useState([]);
     <ul>
           {items.map(item => {
             return(
-              <li key={item.id}>{item.value}</li>
+              <li key={item.id}>{item.value}<input type = "checkbox"></li>
             )
           })}
         </ul>
-  
+      </header>
     </div>
-  );   
+    
+    );
   
 }
 
