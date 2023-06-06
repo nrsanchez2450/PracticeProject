@@ -24,4 +24,5 @@ const Todo = () => {
       <button type = "submit" onClick= {() => addItem()}> Add </button>
   
     </div>
-    
+  
+export default Todo;
