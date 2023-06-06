@@ -30,7 +30,7 @@ const[items, setItems] = useState([]);
   
   return (
       <div className="To-Do App">
-    <div className = "intuative-checkbox">
+    <div className = "intuative-checkbox"></div>
       <header className="App-header">
         <h1> To-Do List</h1>
     
@@ -46,7 +46,6 @@ const[items, setItems] = useState([]);
           })}
         </ul>
       </header>
-    </div>
     </div>
     
     );
