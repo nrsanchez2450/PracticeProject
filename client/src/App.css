@@ -14,5 +14,8 @@
 }
 
 
-
+.intuative-checkbox input[type="checkbox"],
+.intuative-checkbox input[type="checkbox"]:checked {
+  text-decoration: line-through;
+}
 
