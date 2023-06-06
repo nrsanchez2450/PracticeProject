@@ -1,4 +1,5 @@
 import './App.css';
+import './ToDoActions.js';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     
     <ul>
     {
-    tasks
+    items.map(item) =>
         
       </header>
     </div>
