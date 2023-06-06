@@ -1,11 +1,5 @@
-var express = require('express');
+import express from "express";
 
+const app = express();
 
-var indexRouter = require('./routes/login');
-var usersRouter = require('./routes/users');
-
-var app = express();
-
-
-
-module.exports = app;
+app.use(express.json());
