@@ -5,6 +5,9 @@ function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
+const DeleteAll = () => {
+    setItems([])
+  }
   
   
  const addItem = () => {
@@ -30,13 +33,13 @@ const[items, setItems] = useState([]);
   
   return (
       <div className="To-Do App">
-    <div className = "intuative-checkbox"></div>
       <header className="App-header">
         <h1> To-Do List</h1>
     
       <input type = "text" placeholder = "Enter task" value = {newItem}
         onChange= {(e) => setNewItem(e.target.value)}/>
       <button type = "submit" onClick= {() => addItem()}> Add </button>
+      <button onClick={() => DeleteAll()}>Clear All</button>
 
     <ul>
           {items.map(item => {
