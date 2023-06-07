@@ -1,6 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
 import bcrypt from "bcrypt";
+import { env } from "process";
+import { access } from "fs";
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const prisma = new PrismaClient();
 const app = express();
@@ -15,41 +19,57 @@ app.get("/users", async (req, res) => {
 });
 
 // Create new user
-app.post("/users", async (req, res) => {
+app.post("/register", async (req, res) => {
   try {
-    const username = req.body.username;
-    const hashedPass = await bcrypt.hash(req.body.password, 10);
+    const { username, password } = req.body.user;
+
+    // Perform input validation here (e.g., check for required fields, length, etc.)
+
+    const hashedPass = await bcrypt.hash(password, 10);
+
     await prisma.user.create({
       data: {
         username: username,
         password: hashedPass,
       },
     });
-    res.status(201).send();
-  } catch {
-    res.status(500).send();
+
+    res.status(201).json({ message: "Registration successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Registration failed" });
   }
 });
 
 // Validate user
-app.post("/users/login", async (req, res) => {
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body.user;
   const user = await prisma.user.findFirst({
-    where: { username: req.body.username },
+    where: { username: username },
   });
-
   if (!user) {
     return res.status(400).send("Cannot find user");
   }
-
-  if (await bcrypt.compare(req.body.password, user.password)) {
-    res.send("Success");
+  console.log({ username, password });
+  console.log(user);
+  if (await bcrypt.compare(user.password, password)) {
+    res.status(403).send("Invalid Credentials");
   } else {
-    res.send("Failure");
+    const acessToken = jwt.sign(user, process.env.JWT_KEY);
+    res.status(201);
   }
 });
 
-// Sign out user
+// TODO: Sign out user
 
-app.listen(3000, () => {
-  console.log("Server ready at http://localhost:3000");
+// Authenticate Token
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers["authorization"];
+//   const token = authHeader && authHeader.split(" ")[1];
+//   if (token == null) return res.status(401)
+
+// }
+
+app.listen(8080, () => {
+  console.log("Server ready at http://localhost:8080");
 });
