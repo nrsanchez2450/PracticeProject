@@ -1,18 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const authContext = useContext(AuthContext);
 
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (authContext && authContext.login) {
-      await authContext.login({ username, password });
-    }
   };
 
   return (
