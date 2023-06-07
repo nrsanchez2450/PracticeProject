@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { Link, Route, Routes } from "react-router-dom";
-import SignIn from "./SignIn";
+import { Link, Routes } from "react-router-dom";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
@@ -15,9 +14,7 @@ export default function SignUp() {
 
   return (
     <>
-      <Routes>
-        <Route path="/SignIn" element={<SignIn />} />
-      </Routes>
+      <Routes></Routes>
       <Stack m={"auto"} mt={"10%"} width={"40%"} spacing={2.5}>
         <Typography variant="h4">Sign up</Typography>
         <div>
@@ -64,7 +61,7 @@ export default function SignUp() {
           Sign Up
         </Button>
         <Typography>
-          Don't have an account?
+          Already have an account?
           <Link to={"/SignIn"}>
             <Button variant="text" color="secondary">
               Sign In
