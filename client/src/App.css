@@ -13,4 +13,13 @@
   color: black;
 }
 
+input{
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  margin-left: 10px;
+  margin-top: 40px;
+  background-color: #ffffff;
+}
+
 
