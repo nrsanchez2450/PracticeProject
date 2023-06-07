@@ -5,8 +5,12 @@ function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
+const [count, setCount] = useState(0);
+
 const DeleteAll = () => {
     setItems([])
+    setCount(0)
+
   }
   
   
