@@ -5,6 +5,26 @@ function App() {
 
 const[newItem, setNewItem] = useState("");
 const[items, setItems] = useState([]);
+const[tasksRemaining, setTasksRemaining] = useState(0);
+
+    
+  const handleComplete = (id) => {
+    let list = items.map((item) => {
+      let index = {};
+      if (item.id === id) {
+        if (!item.complete) {
+          setTasksRemaining(tasksRemaining + 1);
+        } else {
+          setTasksRemaining(tasksRemaining - 1);
+        }
+        index = {...item, complete: !item.complete};
+      } else index = {...item };
+
+      return index;
+    });
+    setItems(list);
+  };  
+    
 
 const DeleteAll = () => {
     setItems([])
@@ -46,7 +66,7 @@ const DeleteAll = () => {
     <ul>
           {items.map(item => {
             return(
-              <li key={item.id}>{item.value}<input type = "checkbox"></li>
+              <li key={item.id}>{item.value}<input type = "checkbox" onClick={() => handleComplete(item.id)}></li>
             )
           })}
         </ul>
