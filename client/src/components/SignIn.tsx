@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,18 @@ export default function SignIn() {
 
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    if (response.status === 201) {
+      window.location.href = "/HomePage";
+    } else {
+      // TODO: Notify user of wrong password or no account
+    }
   };
 
   return (
@@ -32,6 +44,7 @@ export default function SignIn() {
             <Typography variant="h6">Password</Typography>
             <TextField
               fullWidth
+              type="password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}

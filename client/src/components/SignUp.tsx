@@ -57,7 +57,12 @@ export default function SignUp() {
           />
         </div>
 
-        <Button variant="contained" color="secondary" fullWidth>
+        <Button
+          variant="contained"
+          color="secondary"
+          fullWidth
+          disabled={!isMatch}
+        >
           Sign Up
         </Button>
         <Typography>
