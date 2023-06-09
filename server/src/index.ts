@@ -32,6 +32,7 @@ app.post("/register", async (req, res) => {
         password: hashedPass,
       },
     });
+    console.log(username, hashedPass);
     res.status(201).send();
   } catch {
     res.status(500).send();
@@ -50,12 +51,42 @@ app.post("/login", async (req: Request, res: Response) => {
   if (await bcrypt.compare(user.password, password)) {
     res.status(403);
   } else {
-    const token = jwt.sign(user, process.env.JWT_KEY, { expiresIn: "1h" });
-    console.log(token);
-    res.status(201).json(token);
+    const token: string = jwt.sign(user, process.env.JWT_KEY, {
+      expiresIn: "1h",
+    });
+    res.status(201).send();
   }
 });
 
+// TODO: Sign out user
+app.post("/logout", async (req, res) => {});
+
+// Fetch Tasks
+app.post("/getTasks", async (req, res) => {
+  const user = req.body.username;
+  const tasks = await prisma.user.findFirst({
+    where: { username: user },
+    select: { task: true },
+  });
+  console.log(tasks);
+  res.status(201).json(tasks);
+});
+
+app.post("/addTask", async (req, res) => {
+  const taskBody: string = req.body.body;
+  const taskStatus: boolean = req.body.status;
+  const userId: number = req.body.userId;
+  const newTask = await prisma.task.create({
+    data: {
+      userId: userId,
+      body: taskBody,
+      completed: taskStatus,
+    },
+  });
+  res.send(newTask);
+});
+
+// Middleware
 // TODO: Verify Token
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
   // Get the JWT from the request headers, cookies, or query parameters
@@ -82,16 +113,6 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
     }
   );
 }
-
-// TODO: Sign out user
-
-// Authenticate Token
-// function authenticateToken(req, res, next) {
-//   const authHeader = req.headers["authorization"];
-//   const token = authHeader && authHeader.split(" ")[1];
-//   if (token == null) return res.status(401)
-
-// }
 
 app.listen(8080, () => {
   console.log("Server ready at http://localhost:8080");

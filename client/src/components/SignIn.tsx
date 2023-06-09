@@ -1,10 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeUserContext } from "../App";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const changeUser = useContext(ChangeUserContext);
+  const navigate = useNavigate();
 
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -16,9 +19,11 @@ export default function SignIn() {
       body: JSON.stringify({ username, password }),
     });
     if (response.status === 201) {
-      window.location.href = "/HomePage";
+      changeUser(username);
+      navigate("/HomePage");
     } else {
       // TODO: Notify user of wrong password or no account
+      alert("Incorrect credentials");
     }
   };
 
