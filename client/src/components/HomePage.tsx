@@ -21,23 +21,19 @@ function HomePage(): JSX.Element {
     if (!username) {
       navigate("/SignIn");
     }
-  }, [username]);
+  }, [username, navigate]);
 
   const handleComplete = (id: number): void => {
-    let list = items.map((item) => {
-      let index: Item = {
-        id: 0,
-        value: "",
-        complete: false,
-      };
+    let list: Item[] = items.map((item) => {
+      let index: Item = { ...item };
       if (item.id === id) {
         if (!item.complete) {
           setTasksRemaining(tasksRemaining + 1);
         } else {
           setTasksRemaining(tasksRemaining - 1);
         }
-        index = { ...item, complete: !item.complete };
-      } else index = { ...item };
+        index.complete = !item.complete;
+      }
 
       return index;
     });
@@ -57,12 +53,12 @@ function HomePage(): JSX.Element {
         value: newItem,
         complete: false,
       };
-      setItems([...items, newItemObject]);
+      setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
     }
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = (): void => {
     changeUser("");
   };
 
@@ -70,6 +66,7 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
       <header className="App-header">
         <h1> To-Do List</h1>
+        <p> {items.length - tasksRemaining} daily tasks left. </p>
 
         <input
           type="text"
@@ -78,7 +75,8 @@ function HomePage(): JSX.Element {
           onChange={(e) => setNewItem(e.target.value)}
         />
         <button type="submit" onClick={() => addItem()}>
-          Add
+          {" "}
+          Add{" "}
         </button>
         <button onClick={() => deleteAll()}>Clear All</button>
 
@@ -90,13 +88,12 @@ function HomePage(): JSX.Element {
                 <input
                   type="checkbox"
                   onClick={() => handleComplete(item.id)}
-                />
+                ></input>
               </li>
             );
           })}
         </ul>
       </header>
-      <button onClick={handleSignOut}>Logout</button>
     </div>
   );
 }
