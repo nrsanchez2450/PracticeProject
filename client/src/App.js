@@ -57,6 +57,7 @@ const DeleteAll = () => {
       <div className="To-Do App">
       <header className="App-header">
         <h1> To-Do List</h1>
+      <p> {items.length - tasksRemaining} daily tasks left. </p>
     
       <input type = "text" placeholder = "Enter task" value = {newItem}
         onChange= {(e) => setNewItem(e.target.value)}/>
