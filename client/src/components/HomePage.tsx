@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 interface Item {
   id: number;
-  value: string;
-  complete: boolean;
+  body: string;
+  completed: boolean;
 }
 
 function HomePage(): JSX.Element {
@@ -17,22 +17,52 @@ function HomePage(): JSX.Element {
   const navigate = useNavigate();
   const changeUser = useContext(ChangeUserContext);
 
+  // Loading user's task on login
   useEffect(() => {
     if (!username) {
       navigate("/SignIn");
     }
-  }, [username, navigate]);
+    async function fetchTasks() {
+      const response = await fetch("/getTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username }),
+      });
+
+      if (response.ok) {
+        const tasks: Item[] = await response.json();
+        setItems(tasks);
+      }
+    }
+    fetchTasks();
+  }, []);
+
+  // useEffect(() => {
+  //   addToDB(newItem, false);
+  // }, [items]);
+
+  // function addToDB(body: string, status: boolean) {
+  //   fetch("/addTask", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ user: username, body: body, status: status }),
+  //   });
+  // }
 
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
       if (item.id === id) {
-        if (!item.complete) {
+        if (!item.completed) {
           setTasksRemaining(tasksRemaining + 1);
         } else {
           setTasksRemaining(tasksRemaining - 1);
         }
-        index.complete = !item.complete;
+        index.completed = !item.completed;
       }
 
       return index;
@@ -44,17 +74,18 @@ function HomePage(): JSX.Element {
     setItems([]);
   };
 
-  const addItem = (): void => {
+  const addItem = async () => {
     if (!newItem) {
       return;
     } else {
       const newItemObject: Item = {
         id: Math.floor(Math.random() * 1000),
-        value: newItem,
-        complete: false,
+        body: newItem,
+        completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
+      // await addToDB(newItem, false);
     }
   };
 
@@ -84,9 +115,12 @@ function HomePage(): JSX.Element {
           {items.map((item) => {
             return (
               <li key={item.id}>
-                {item.value}
+                <p className={item.completed ? "strikethrough" : ""}>
+                  {item.body}
+                </p>
                 <input
                   type="checkbox"
+                  checked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
               </li>
@@ -94,6 +128,7 @@ function HomePage(): JSX.Element {
           })}
         </ul>
       </header>
+      <button onClick={handleSignOut}>Logout</button>
     </div>
   );
 }

@@ -58,9 +58,6 @@ app.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-// TODO: Sign out user
-app.post("/logout", async (req, res) => {});
-
 // Fetch Tasks
 app.post("/getTasks", async (req, res) => {
   const user = req.body.username;
@@ -68,10 +65,11 @@ app.post("/getTasks", async (req, res) => {
     where: { username: user },
     select: { task: true },
   });
-  console.log(tasks);
-  res.status(201).json(tasks);
+  console.log(tasks?.task);
+  res.status(201).send(tasks?.task);
 });
 
+// Add task
 app.post("/addTask", async (req, res) => {
   const taskBody: string = req.body.body;
   const taskStatus: boolean = req.body.status;
