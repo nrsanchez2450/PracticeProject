@@ -91,7 +91,7 @@ app.put("/updateTask", async (req, res) => {
     data: {
       userId: userId,
       body: titleBody,
-]    },
+    },
  });
   res.send(updateStatus);
 });
