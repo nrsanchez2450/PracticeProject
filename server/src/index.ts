@@ -85,16 +85,14 @@ app.post("/addTask", async (req, res) => {
 });
 
 app.put("/updateTask", async (req, res) => {
- const titleBody: string = req.body.body;
- const userId: number = req.body.userId;
- const updateStatus = await prisma.task.update({
-    data: {
-      userId: userId,
-      body: titleBody,
-    },
- });
-  res.send(updateStatus);
-});
+  const id: number = req.body.id;
+
+  const updatedTask = await prisma.task.update({
+    where: {id: Number(id) },
+    data: { completed: true},
+    })
+    res.send(updatedTask);
+  });
 
 
 // Middleware
