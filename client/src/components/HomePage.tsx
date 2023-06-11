@@ -77,6 +77,16 @@ function HomePage(): JSX.Element {
       return index;
     });
     setItems(list);
+    
+    async function updateToDB(id: number, body: string) {
+    fetch("/updateTask", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ taskId: id, body: body }),
+    });
+  }
   };
 
   const deleteAll = (): void => {
