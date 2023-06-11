@@ -42,15 +42,7 @@ function HomePage(): JSX.Element {
     }
   }, [username]);
 
-  async function updateToDB(id: number, body: string) {
-    fetch("/updateTask", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id, body: body }),
-    });
-  }
+  
 
   function addToDB(body: string) {
     fetch("/addTask", {
@@ -84,7 +76,7 @@ function HomePage(): JSX.Element {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ taskId: id, body: body }),
+      body: JSON.stringify({ id: id, body: body }),
     });
   }
   };
