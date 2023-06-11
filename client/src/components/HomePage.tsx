@@ -38,6 +38,7 @@ function HomePage(): JSX.Element {
     }
     fetchTasks();
   }, []);
+  
 
   // useEffect(() => {
   //   addToDB(newItem, false);
