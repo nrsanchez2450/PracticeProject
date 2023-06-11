@@ -48,7 +48,7 @@ function HomePage(): JSX.Element {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ taskId: id, body: body }),
+      body: JSON.stringify({ id: id, body: body }),
     });
   }
 
