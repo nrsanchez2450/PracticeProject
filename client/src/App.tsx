@@ -13,7 +13,6 @@ function App() {
     <React.StrictMode>
       <UserContext.Provider value={user}>
         <ChangeUserContext.Provider value={changeUser}>
-          <h4>User: {user}</h4>
           <BrowserRouter>
             <Routes>
               <Route path="/SignUp" element={<SignUp />} />

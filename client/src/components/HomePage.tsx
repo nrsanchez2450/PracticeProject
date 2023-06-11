@@ -19,9 +19,6 @@ function HomePage(): JSX.Element {
 
   // Loading user's task on login
   useEffect(() => {
-    if (!username) {
-      navigate("/SignIn");
-    }
     async function fetchTasks() {
       const response = await fetch("/getTasks", {
         method: "POST",
@@ -38,7 +35,12 @@ function HomePage(): JSX.Element {
     }
     fetchTasks();
   }, []);
-  
+
+  useEffect(() => {
+    if (!username) {
+      navigate("/SignIn");
+    }
+  }, [username]);
 
   // useEffect(() => {
   //   addToDB(newItem, false);
@@ -53,14 +55,23 @@ function HomePage(): JSX.Element {
   //     body: JSON.stringify({ user: username, body: body, status: status }),
   //   });
   // }
-  
+
   async function updateToDB(id: number) {
     fetch("/updateTask", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({taskId: id})
+      body: JSON.stringify({ taskId: id }),
+    });
+  }
+  function addToDB(body: string) {
+    fetch("/addTask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username, body: body }),
     });
   }
 
@@ -83,6 +94,13 @@ function HomePage(): JSX.Element {
 
   const deleteAll = (): void => {
     setItems([]);
+    fetch("/clearTasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username }),
+    });
   };
 
   const addItem = async () => {
@@ -96,7 +114,7 @@ function HomePage(): JSX.Element {
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-      // await addToDB(newItem, false);
+      addToDB(newItem);
     }
   };
 

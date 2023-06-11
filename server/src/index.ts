@@ -32,7 +32,6 @@ app.post("/register", async (req, res) => {
         password: hashedPass,
       },
     });
-    console.log(username, hashedPass);
     res.status(201).send();
   } catch {
     res.status(500).send();
@@ -65,35 +64,45 @@ app.post("/getTasks", async (req, res) => {
     where: { username: user },
     select: { task: true },
   });
-  console.log(tasks?.task);
   res.status(201).send(tasks?.task);
 });
 
 // Add task
 app.post("/addTask", async (req, res) => {
   const taskBody: string = req.body.body;
-  const taskStatus: boolean = req.body.status;
-  const userId: number = req.body.userId;
+  const userId = await prisma.user.findFirst({
+    where: { username: req.body.user },
+    select: { id: true },
+  });
   const newTask = await prisma.task.create({
     data: {
-      userId: userId,
+      userId: userId?.id,
       body: taskBody,
-      completed: taskStatus,
+      completed: false,
     },
   });
   res.send(newTask);
+});
+
+app.post("/clearTasks", async (req, res) => {
+  const userId = await prisma.user.findFirst({
+    where: { username: req.body.user },
+    select: { id: true },
+  });
+  await prisma.task.deleteMany({
+    where: { userId: userId?.id },
+  });
 });
 
 app.put("/updateTask", async (req, res) => {
   const id: number = req.body.id;
 
   const updatedTask = await prisma.task.update({
-    where: {id: Number(id) },
-    data: { completed: true},
-    })
-    res.send(updatedTask);
+    where: { id: Number(id) },
+    data: { completed: true },
   });
-
+  res.send(updatedTask);
+});
 
 // Middleware
 // TODO: Verify Token
