@@ -67,10 +67,8 @@ function HomePage(): JSX.Element {
       }
 
       return index;
-    });
-    setItems(list);
-    
-    async function updateToDB(id: number, body: string) {
+      
+      async function updateToDB(id: number, body: string) {
     fetch("/updateTask", {
       method: "PUT",
       headers: {
@@ -79,6 +77,10 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ id: id, body: body }),
     });
   }
+      
+    });
+    setItems(list);
+    
   };
 
   const deleteAll = (): void => {
