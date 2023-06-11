@@ -53,6 +53,16 @@ function HomePage(): JSX.Element {
   //     body: JSON.stringify({ user: username, body: body, status: status }),
   //   });
   // }
+  
+  async function updateToDB(id: number) {
+    fetch("/updateTask", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({taskId: id})
+    });
+  }
 
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
