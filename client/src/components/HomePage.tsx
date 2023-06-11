@@ -42,20 +42,6 @@ function HomePage(): JSX.Element {
     }
   }, [username]);
 
-  // useEffect(() => {
-  //   addToDB(newItem, false);
-  // }, [items]);
-
-  // function addToDB(body: string, status: boolean) {
-  //   fetch("/addTask", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ user: username, body: body, status: status }),
-  //   });
-  // }
-
   async function updateToDB(id: number) {
     fetch("/updateTask", {
       method: "PUT",
@@ -65,6 +51,7 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ taskId: id }),
     });
   }
+
   function addToDB(body: string) {
     fetch("/addTask", {
       method: "POST",
