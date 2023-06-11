@@ -95,11 +95,11 @@ app.post("/clearTasks", async (req, res) => {
 });
 
 app.put("/updateTask", async (req, res) => {
-  const id: number = req.body.id;
-
+  const id = req.params;
+  const body = req.body;
   const updatedTask = await prisma.task.update({
-    where: { id: Number(id) },
-    data: { completed: true },
+    where: {id: Number(id)} ,
+    data: {body: String(body)},
   });
   res.send(updatedTask);
 });
