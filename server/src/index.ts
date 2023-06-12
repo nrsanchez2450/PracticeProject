@@ -87,24 +87,30 @@ app.post("/addTask", async (req, res) => {
 });
 
 app.put("/updateTask", async (req, res) => {
-  const id = req.params;
+  const id = req.body;
+  console.log(id);
   const updatedTask = await prisma.task.update({
-    where: {id: Number(id)} ,
-    data: {completed: true},
+    where: { id: id },
+    data: { completed: true },
   });
   res.send(updatedTask);
 });
 
 app.get("/matchId", async (req, res) => {
-  let data = await prisma.task.findFirst({
+  const data = await prisma.task.findFirst({
     orderBy: {
-      id: 'desc'
-    }
+      id: "desc",
+    },
+    select: {
+      id: true,
+    },
   });
-  res.json(data).send();
+  if (data === null) {
+    res.json({ id: 1 });
+  } else {
+    res.json({ id: data.id + 1 });
+  }
 });
-
-
 
 // Middleware
 // TODO: Verify Token

@@ -25,12 +25,11 @@ function HomePage(): JSX.Element {
 
   const handleItems = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await fetch('/getTasks', {
-        method: "POST",
-        body: JSON.stringify({items}),
-    })
+    const response = await fetch("/getTasks", {
+      method: "POST",
+      body: JSON.stringify({ items }),
+    });
   };
-  
 
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
@@ -59,32 +58,29 @@ function HomePage(): JSX.Element {
     setItems(list);
   };
 
-  
-
   const deleteAll = (): void => {
     setItems([]);
     setTasksRemaining(0);
   };
 
-  const addItem = async() => {
+  const addItem = async () => {
     if (!newItem) {
       return;
     } else {
-        const response = await fetch("/matchId", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
-      })
+      const response = await fetch("/matchId", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const body = await response.json();
       const newItemObject: Item = {
-        id: body,
+        id: body.id,
         value: newItem,
         complete: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-
     }
   };
 
@@ -115,6 +111,7 @@ function HomePage(): JSX.Element {
             return (
               <li key={item.id}>
                 {item.value}
+                {item.id}
                 <input
                   type="checkbox"
                   onClick={() => handleComplete(item.id)}
