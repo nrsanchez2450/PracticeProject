@@ -64,6 +64,7 @@ function HomePage(): JSX.Element {
           setTasksRemaining(tasksRemaining - 1);
         }
         index.completed = !item.completed;
+        updateToDB(id, body);
       }
 
       return index;
