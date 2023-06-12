@@ -82,6 +82,8 @@ function HomePage(): JSX.Element {
 
   const deleteAll = (): void => {
     setItems([]);
+    setTasksRemaining(0);
+
     fetch("/clearTasks", {
       method: "POST",
       headers: {
