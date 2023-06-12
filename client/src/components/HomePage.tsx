@@ -42,8 +42,6 @@ function HomePage(): JSX.Element {
     }
   }, [username]);
 
-  
-
   function addToDB(body: string) {
     fetch("/addTask", {
       method: "POST",
@@ -68,20 +66,18 @@ function HomePage(): JSX.Element {
       }
 
       return index;
-      
+
       async function updateToDB(id: number) {
-    fetch("/updateTask", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: id}),
-    });
-  }
-      
+        fetch("/updateTask", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id }),
+        });
+      }
     });
     setItems(list);
-    
   };
 
   const deleteAll = (): void => {
@@ -99,8 +95,15 @@ function HomePage(): JSX.Element {
     if (!newItem) {
       return;
     } else {
+      const response = await fetch("/matchId", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const body = await response.json();
       const newItemObject: Item = {
-        id: Math.floor(Math.random() * 1000),
+        id: body,
         body: newItem,
         completed: false,
       };

@@ -97,10 +97,19 @@ app.post("/clearTasks", async (req, res) => {
 app.put("/updateTask", async (req, res) => {
   const id = req.params;
   const updatedTask = await prisma.task.update({
-    where: {id: Number(id)} ,
-    data: {completed: true},
+    where: { id: Number(id) },
+    data: { completed: true },
   });
   res.send(updatedTask);
+});
+
+app.get("/matchId", async (req, res) => {
+  let data = await prisma.task.findFirst({
+    orderBy: {
+      id: "desc",
+    },
+  });
+  res.json(data).send();
 });
 
 // Middleware
