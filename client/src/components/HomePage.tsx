@@ -65,17 +65,25 @@ function HomePage(): JSX.Element {
     setItems([]);
   };
 
-  const addItem = (): void => {
+  const addItem = async() => {
     if (!newItem) {
       return;
     } else {
+        const response = await fetch("/matchId", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+      })
+      const body = await response.json();
       const newItemObject: Item = {
-        id: Math.floor(Math.random() * 1000),
+        id: body,
         value: newItem,
         complete: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
+
     }
   };
 

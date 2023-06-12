@@ -95,6 +95,15 @@ app.put("/updateTask", async (req, res) => {
   res.send(updatedTask);
 });
 
+app.get("/matchId", async (req, res) => {
+  let data = await prisma.task.findFirst({
+    orderBy: {
+      id: 'desc'
+    }
+  });
+  res.json(data).send();
+});
+
 
 
 // Middleware
