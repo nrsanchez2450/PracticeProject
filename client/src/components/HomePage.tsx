@@ -64,18 +64,18 @@ function HomePage(): JSX.Element {
           setTasksRemaining(tasksRemaining - 1);
         }
         index.completed = !item.completed;
-        updateToDB(id, body);
+        updateToDB(id);
       }
 
       return index;
       
-      async function updateToDB(id: number, body: string) {
+      async function updateToDB(id: number) {
     fetch("/updateTask", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id, body: body }),
+      body: JSON.stringify({ id: id}),
     });
   }
       
