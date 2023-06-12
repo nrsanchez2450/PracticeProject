@@ -17,7 +17,7 @@ function App() {
             <Routes>
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/SignIn" element={<SignIn />} />
-              <Route path="/HomePage" element={<HomePage />} />
+              <Route path="/" element={<HomePage />} />
             </Routes>
           </BrowserRouter>
         </ChangeUserContext.Provider>

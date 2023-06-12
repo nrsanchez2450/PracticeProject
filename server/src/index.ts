@@ -95,9 +95,10 @@ app.post("/clearTasks", async (req, res) => {
 });
 
 app.put("/updateTask", async (req, res) => {
-  const id = req.params;
+  const id = req.body;
+  console.log(id);
   const updatedTask = await prisma.task.update({
-    where: { id: Number(id) },
+    where: { id: id },
     data: { completed: true },
   });
   res.send(updatedTask);
@@ -109,7 +110,7 @@ app.get("/matchId", async (req, res) => {
       id: "desc",
     },
   });
-  res.json(data).send();
+  res.json(data);
 });
 
 // Middleware
