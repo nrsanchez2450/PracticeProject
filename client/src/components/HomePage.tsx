@@ -23,6 +23,15 @@ function HomePage(): JSX.Element {
     }
   }, [username, navigate]);
 
+  const handleItems = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const response = await fetch('/getTasks', {
+        method: "POST",
+        body: JSON.stringify({items}),
+    })
+  };
+  
+
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
@@ -33,12 +42,24 @@ function HomePage(): JSX.Element {
           setTasksRemaining(tasksRemaining - 1);
         }
         index.complete = !item.complete;
+        updateToDB(id);
       }
 
       return index;
+      async function updateToDB(id: number) {
+        fetch("/updateTask", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id }),
+        });
+      }
     });
     setItems(list);
   };
+
+  
 
   const deleteAll = (): void => {
     setItems([]);

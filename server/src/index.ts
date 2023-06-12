@@ -86,6 +86,17 @@ app.post("/addTask", async (req, res) => {
   res.send(newTask);
 });
 
+app.put("/updateTask", async (req, res) => {
+  const id = req.params;
+  const updatedTask = await prisma.task.update({
+    where: {id: Number(id)} ,
+    data: {completed: true},
+  });
+  res.send(updatedTask);
+});
+
+
+
 // Middleware
 // TODO: Verify Token
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
