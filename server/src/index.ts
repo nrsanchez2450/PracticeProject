@@ -95,7 +95,7 @@ app.post("/clearTasks", async (req, res) => {
 });
 
 app.put("/updateTask", async (req, res) => {
-  const id = req.body;
+  const id = req.body.id;
   console.log(id);
   const updatedTask = await prisma.task.update({
     where: { id: id },
@@ -109,8 +109,16 @@ app.get("/matchId", async (req, res) => {
     orderBy: {
       id: "desc",
     },
+    select: {
+      id: true,
+    },
   });
-  res.json(data);
+  if (data === null) {
+    console.log("broke");
+    res.json({ id: 0 });
+  } else {
+    res.json(data);
+  }
 });
 
 // Middleware

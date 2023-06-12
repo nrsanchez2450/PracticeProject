@@ -104,14 +104,15 @@ function HomePage(): JSX.Element {
         },
       });
       const body = await response.json();
+      alert(body.id);
       const newItemObject: Item = {
-        id: body,
+        id: body.id,
         body: newItem,
         completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-      addToDB(newItem);
+      addToDB(newItemObject.body);
     }
   };
 
@@ -143,6 +144,7 @@ function HomePage(): JSX.Element {
               <li key={item.id}>
                 <p className={item.completed ? "strikethrough" : ""}>
                   {item.body}
+                  {item.id}
                 </p>
                 <input
                   type="checkbox"
