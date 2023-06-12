@@ -73,7 +73,7 @@ function HomePage(): JSX.Element {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id: id }),
+          body: JSON.stringify({ id: id, completed: true }),
         });
       }
     });
