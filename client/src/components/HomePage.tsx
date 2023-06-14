@@ -123,7 +123,7 @@ function HomePage(): JSX.Element {
   return (
     <div className="To-Do App">
       <header className="App-header">
-        <h1> To-Do List</h1>
+        <h3> To-Do List</h3>
         <p> {items.length - tasksRemaining} daily tasks left. </p>
 
         <input
@@ -138,7 +138,6 @@ function HomePage(): JSX.Element {
         </button>
         <button onClick={() => deleteAll()}>Clear All</button>
 
-        <ul>
           {items.map((item) => {
             return (
               <li key={item.id}>
@@ -154,7 +153,6 @@ function HomePage(): JSX.Element {
               </li>
             );
           })}
-        </ul>
       </header>
       <button onClick={handleSignOut}>Logout</button>
     </div>
