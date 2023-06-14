@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
+import {Button} from '@mui/material';
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -124,19 +125,18 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
       <header className="App-header">
         <h3> To-Do List</h3>
-        <p> {items.length - tasksRemaining} daily tasks left. </p>
-
+        
         <input
           type="text"
           placeholder="Enter task"
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
         />
-        <button type="submit" onClick={() => addItem()}>
+        <Button variant="contained" onClick={() => addItem()}>
           {" "}
           Add{" "}
-        </button>
-        <button onClick={() => deleteAll()}>Clear All</button>
+        </Button>
+        <label onClick={() => deleteAll()}>Clear All</label>
 
           {items.map((item) => {
             return (
@@ -150,6 +150,8 @@ function HomePage(): JSX.Element {
                   checked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
+                <hr/>
+                <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
             );
           })}
