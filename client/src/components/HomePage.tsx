@@ -150,6 +150,7 @@ function HomePage(): JSX.Element {
                 </p>
                 <input
                   type="checkbox"
+                  checked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
              <p> {items.length - tasksRemaining} daily tasks left. </p>
