@@ -156,7 +156,7 @@ function HomePage(): JSX.Element {
             );
           })}
       </header>
-      <button onClick={handleSignOut}>Logout</button>
+      <Button variant = 'text' onClick={handleSignOut}>Logout</Button>
     </div>
   );
 }
