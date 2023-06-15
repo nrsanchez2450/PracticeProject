@@ -140,6 +140,7 @@ function HomePage(): JSX.Element {
 
           {items.map((item) => {
             return (
+              <ul>
               <li key={item.id}>
                 <p className={item.completed ? "strikethrough" : ""}>
                   {item.body}
@@ -153,6 +154,7 @@ function HomePage(): JSX.Element {
                 <hr/>
                 <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
+              </ul>
             );
           })}
       </header>
