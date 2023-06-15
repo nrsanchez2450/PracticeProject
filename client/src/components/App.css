@@ -22,7 +22,7 @@ input {
   background-color: #ffffff;
 }
 
-Button {
+Button.contained {
   background-color: blueviolet;
   margin-left: 230px;
   color: #ffffff;
@@ -33,7 +33,6 @@ Button {
 }
 
 label {
-  text-decoration-line: underline;
   text-align: right;
 }
 
@@ -43,5 +42,11 @@ p {
   position: absolute;
   bottom: -100px;
   left: 16px;
+}
+
+Button.text {
+  position: absolute;
+  top: -100px;
+  right:  16px;
 }
 
