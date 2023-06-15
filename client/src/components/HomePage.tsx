@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 interface Item {
   id: number;
-  value: string;
-  complete: boolean;
+  body: string;
+  completed: boolean;
 }
 
 function HomePage(): JSX.Element {
@@ -19,43 +19,103 @@ function HomePage(): JSX.Element {
   const changeUser = useContext(ChangeUserContext);
 
   useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch("/getTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username }),
+      });
+
+      if (response.ok) {
+        const tasks: Item[] = await response.json();
+        setItems(tasks);
+      }
+    }
+    fetchTasks();
+  }, []);
+  
+  
+  useEffect(() => {
     if (!username) {
       navigate("/SignIn");
     }
   }, [username, navigate]);
 
+
+  function addToDB(body: string) {
+    fetch("/addTask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username, body: body }),
+    });
+  }
+
+
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
       if (item.id === id) {
-        if (!item.complete) {
+        if (!item.completed) {
           setTasksRemaining(tasksRemaining + 1);
         } else {
           setTasksRemaining(tasksRemaining - 1);
         }
-        index.complete = !item.complete;
+        index.completed = !item.completed;
+        updateToDB(id);
       }
 
       return index;
+
+      async function updateToDB(id: number) {
+        fetch("/updateTask", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id, completed: true }),
+        });
+      }
     });
     setItems(list);
   };
 
   const deleteAll = (): void => {
     setItems([]);
+    setTasksRemaining(0);
+
+    fetch("/clearTasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username }),
+    });
   };
 
-  const addItem = (): void => {
+  const addItem = async() => {
     if (!newItem) {
       return;
     } else {
+      const response = await fetch("/matchId", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const body = await response.json();
+      alert(body.id);
       const newItemObject: Item = {
-        id: Math.floor(Math.random() * 1000),
-        value: newItem,
-        complete: false,
+        id: body.id,
+        body: newItem,
+        completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
+      addToDB(newItemObject.body);
     }
   };
 
@@ -80,11 +140,14 @@ function HomePage(): JSX.Element {
         </Button>
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
-        <ul>
+
           {items.map((item) => {
             return (
               <li key={item.id}>
-                {item.value}
+                 <p className={item.completed ? "strikethrough" : ""}>
+                {item.body}
+                {item.id}
+                </p>
                 <input
                   type="checkbox"
                   onClick={() => handleComplete(item.id)}
@@ -93,9 +156,8 @@ function HomePage(): JSX.Element {
               </li>
             );
           })}
-        </ul>
       </header>
-      <Button variant = "text" onClick={handleSignOut}>Logout</Button>
+      <button type = "submit" onClick={handleSignOut}>Logout</button>
     </div>
   );
 }
