@@ -138,7 +138,6 @@ function HomePage(): JSX.Element {
         </Button>
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
-        <ul>
           {items.map((item) => {
             return (
               <ul>
@@ -154,9 +153,9 @@ function HomePage(): JSX.Element {
                 ></input>
                 <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
+              </ul>
             );
           })}
-        </ul>
       </header>
       <Button variant = 'text' onClick={handleSignOut}>Logout</Button>
     </div>
