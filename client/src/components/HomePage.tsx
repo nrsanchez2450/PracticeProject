@@ -140,7 +140,6 @@ function HomePage(): JSX.Element {
 
           {items.map((item) => {
             return (
-              <ul>
               <li key={item.id}>
                 <p className={item.completed ? "strikethrough" : ""}>
                   {item.body}
@@ -155,9 +154,8 @@ function HomePage(): JSX.Element {
               </li>
             );
           })}
-        </ul>
       </header>
-      <Button variant = 'text' onClick={handleSignOut}>Logout</Button>
+      <button type = "submit" onClick={handleSignOut}>Logout</button>
     </div>
   );
 }
