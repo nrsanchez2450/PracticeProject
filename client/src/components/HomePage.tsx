@@ -124,7 +124,7 @@ function HomePage(): JSX.Element {
   return (
     <div className="To-Do App">
       <header className="App-header">
-        <h3> To-Do List</h3>
+        <h3> Daily ToDo List</h3>
         
         <input
           type="text"
@@ -136,7 +136,7 @@ function HomePage(): JSX.Element {
           {" "}
           Add{" "}
         </Button>
-        <label onClick={() => deleteAll()}>Clear All</label>
+        <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
           {items.map((item) => {
             return (
