@@ -1,14 +1,14 @@
 .App {
-  text-align: center;
-  background-color: #CBC3E3;
+  text-align: left;
+  background-color: white;
 }
 
 .App-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   color: black;
 }
@@ -17,14 +17,34 @@ input {
   padding: 10px;
   border-radius: 5px;
   border: 2px solid black;
-  margin-left: 20px;
-  margin-top: 40px;
+  line-height: 20px;
+  height: 20px;
+  vertical-align: middle;
   background-color: #ffffff;
 }
 
-button {
-  border: 2px solid white;
-  background-color: blueviolet;
-  margin-left: 230px;
-  color: #ffffff;
+.strikethrough {
+  text-decoration: line-through;
+}
+
+
+.outlined {
+  position: absolute;
+  bottom: -230px;
+  right: 10px;
+  font-size: 18px;
+}
+
+
+
+p {
+  position: absolute;
+  bottom: -100px;
+  left: 16px;
+}
+
+.text {
+  position: absolute;
+  top: -100px;
+  right:  16px;
 }

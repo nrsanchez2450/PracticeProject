@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
+import { Button } from "@mui/material";
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -65,8 +66,7 @@ function HomePage(): JSX.Element {
   return (
     <div className="To-Do App">
       <header className="App-header">
-        <h1> To-Do List</h1>
-        <p> {items.length - tasksRemaining} daily tasks left. </p>
+        <h3> Daily ToDo List</h3>
 
         <input
           type="text"
@@ -74,11 +74,11 @@ function HomePage(): JSX.Element {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
         />
-        <button type="submit" onClick={() => addItem()}>
+        <Button variant="contained" onClick={() => addItem()}>
           {" "}
           Add{" "}
-        </button>
-        <button onClick={() => deleteAll()}>Clear All</button>
+        </Button>
+        <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
           {items.map((item) => {
@@ -89,11 +89,13 @@ function HomePage(): JSX.Element {
                   type="checkbox"
                   onClick={() => handleComplete(item.id)}
                 ></input>
+             <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
             );
           })}
         </ul>
       </header>
+      <Button variant = "text" onClick={handleSignOut}>Logout</Button>
     </div>
   );
 }
