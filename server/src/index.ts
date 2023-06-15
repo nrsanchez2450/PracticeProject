@@ -25,13 +25,16 @@ app.get("/users", async (req, res) => {
 app.post("/register", async (req, res) => {
   try {
     const username = req.body.username;
+    console.log("Req Recieved");
     const hashedPass = await bcrypt.hash(req.body.password, 10);
+    console.log("Pass hashed");
     await prisma.user.create({
       data: {
         username: username,
         password: hashedPass,
       },
     });
+    console.log("Prisma completed");
     res.status(201).send();
   } catch {
     res.status(500).send();
@@ -48,7 +51,7 @@ app.post("/login", async (req: Request, res: Response) => {
     return res.status(400).send("Cannot find user");
   }
   if (await bcrypt.compare(user.password, password)) {
-    res.status(403);
+    res.status(403).send("Incorrect Password");
   } else {
     const token: string = jwt.sign(user, process.env.JWT_KEY, {
       expiresIn: "1h",
@@ -152,3 +155,5 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
 app.listen(8080, () => {
   console.log("Server ready at http://localhost:8080");
 });
+
+module.exports = app;
