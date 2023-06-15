@@ -51,9 +51,9 @@ p {
   left: 16px;
 }
 
-.text {
+button {
   position: absolute;
-  top: -100px;
+  top: 8px;
   right:  16px;
 }
 
