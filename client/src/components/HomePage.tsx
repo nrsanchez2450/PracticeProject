@@ -153,9 +153,9 @@ function HomePage(): JSX.Element {
                 ></input>
                 <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
-              </ul>
             );
           })}
+        </ul>
       </header>
       <Button variant = 'text' onClick={handleSignOut}>Logout</Button>
     </div>
