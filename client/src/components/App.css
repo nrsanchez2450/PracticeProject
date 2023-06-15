@@ -1,5 +1,5 @@
 .App {
-  text-align: left;
+  text-align: center;
   background-color: white;
 }
 
@@ -7,10 +7,15 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: left;
+  align-items: center;
+  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 input {
@@ -18,14 +23,14 @@ input {
   border-radius: 5px;
   border: 2px solid black;
   margin-left: 10px;
-  margin-left: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
   background-color: #ffffff;
 }
 
 .MuiButton-outlined {
     background-color: blueviolet;
     background: #ffffff;
+    margin-left: 230px;
 }
 
 .MuiButton-outlined{
@@ -42,6 +47,7 @@ p {
   position: absolute;
   bottom: 8px;
   left: 16px;
+  display: inline;
 }
 
 button {
