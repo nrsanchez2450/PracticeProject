@@ -127,6 +127,8 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
       <header className="App-header">
         <h3> Daily ToDo List</h3>
+        <p> {items.length - tasksRemaining} daily tasks left. </p>
+
 
         <input
           type="text"
@@ -153,7 +155,6 @@ function HomePage(): JSX.Element {
                   checked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
-             <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
             );
           })}
