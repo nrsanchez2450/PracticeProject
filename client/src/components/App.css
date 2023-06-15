@@ -23,24 +23,24 @@ input {
   background-color: #ffffff;
 }
 
+.MuiButton-outlined {
+    background-color: blueviolet;
+    background: #ffffff;
+}
 
+.MuiButton-outlined{
+  position: relative;
+  bottom: 8px;
+  right: 16px;
+}
 
 .strikethrough {
   text-decoration: line-through;
 }
 
-
-.outlined {
-  position: absolute;
-  bottom: -100px;
-  right: 16px;
-  font-size: 18px;
-}
-
-
 p {
   position: absolute;
-  bottom: -100px;
+  bottom: 8px;
   left: 16px;
 }
 

@@ -140,7 +140,7 @@ function HomePage(): JSX.Element {
         </Button>
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
-        
+
           {items.map((item) => {
             return (
               <li key={item.id}>
