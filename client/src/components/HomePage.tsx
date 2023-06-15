@@ -151,7 +151,6 @@ function HomePage(): JSX.Element {
                   checked={item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
-                <hr/>
                 <p> {items.length - tasksRemaining} daily tasks left. </p>
               </li>
               </ul>
