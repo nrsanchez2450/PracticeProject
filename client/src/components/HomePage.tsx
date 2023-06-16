@@ -186,6 +186,7 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
+          <hr/>
       <Button className = "logout-btn" variant = "text" onClick={handleSignOut}>Logout</Button>
       <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
       </div>
