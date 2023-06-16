@@ -165,7 +165,7 @@ function HomePage(): JSX.Element {
         </Button></Grid>
         
         </Grid>
-        <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
+        
 
         <ul>
           {Object.values(items).map((item) => {
@@ -187,6 +187,7 @@ function HomePage(): JSX.Element {
 
       </header>
       <button className = "logout-btn" type = "submit" onClick={handleSignOut}>Logout</button>
+      <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
     </div>
   );
 }
