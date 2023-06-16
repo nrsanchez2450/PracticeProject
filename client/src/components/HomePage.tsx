@@ -186,7 +186,7 @@ function HomePage(): JSX.Element {
           </ul>
 
       </header>
-      <button type = "submit" onClick={handleSignOut}>Logout</button>
+      <button className = "logout-btn" type = "submit" onClick={handleSignOut}>Logout</button>
     </div>
   );
 }

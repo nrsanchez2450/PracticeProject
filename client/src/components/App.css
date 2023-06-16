@@ -52,7 +52,7 @@ input {
 
 }
 
-button {
+.logout-btn {
   position: absolute;
   top: 8px;
   right:  16px;
