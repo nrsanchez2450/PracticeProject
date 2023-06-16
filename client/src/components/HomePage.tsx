@@ -145,7 +145,6 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="To-Do App">
-      <header className="App-header">
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
 
@@ -184,8 +183,6 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
-
-      </header>
       <button className = "logout-btn" type = "submit" onClick={handleSignOut}>Logout</button>
       <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
     </div>
