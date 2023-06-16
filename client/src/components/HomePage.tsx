@@ -147,7 +147,7 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
       <header className="App-header">
         <h3> Daily ToDo List</h3>
-        <p> {items.length - tasksRemaining} daily tasks left. </p>
+        <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
 
         <input
           type="text"

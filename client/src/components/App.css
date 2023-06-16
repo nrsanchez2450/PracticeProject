@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   background-color: white;
-  width: 20%;
+  width: 30%;
+  margin: 0 auto;
 }
 
 .App-header {
@@ -45,7 +46,7 @@ input {
   text-decoration: line-through;
 }
 
-p {
+.remaining-tasks {
   position: absolute;
   bottom: 8px;
   left: 16px;
