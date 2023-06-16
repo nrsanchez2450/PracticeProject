@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { Button, Grid, TextField } from "@mui/material";
+import { makeStyles, Button, Grid, TextField } from "@mui/material";
 
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,15 @@ interface Item {
   body: string;
   completed: boolean;
 }
+
+
+const useStyles: Function = makeStyles(() => ({
+  button: {
+    position: 'absolute',
+    top: 8,
+    right: 16,
+  },
+}));
 
 function HomePage(): JSX.Element {
   const [newItem, setNewItem] = useState<string>("");
@@ -143,11 +152,16 @@ function HomePage(): JSX.Element {
     changeUser("");
   };
 
+
+  const classes = useStyles();
+
+
+
   return (
     <div className="To-Do App">
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
-        <Button className = "logout-btn" variant = "text" onClick={handleSignOut}>Logout</Button>
+        <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
       <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
       <hr/>
 
