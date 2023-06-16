@@ -128,8 +128,6 @@ function HomePage(): JSX.Element {
       <header className="App-header">
         <h3> Daily ToDo List</h3>
         <p> {items.length - tasksRemaining} daily tasks left. </p>
-
-
         <input
           type="text"
           placeholder="Enter task"
@@ -143,18 +141,19 @@ function HomePage(): JSX.Element {
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
-          {items.map((item) => {
+          {items.map((Item) => {
             return (
-              <li key={item.id}>
-                 <p className={item.completed ? "strikethrough" : ""}>
-                {item.body}
-                {item.id}
+              <li key={Item.id}>
+                 <p className={Item.completed ? "strikethrough" : ""}>
+                {Item.body}
+                {Item.id}
                 </p>
                 <input
                   type="checkbox"
-                  checked={item.completed}
-                  onClick={() => handleComplete(item.id)}
+                  checked = {Item.completed}
+                  onClick={() => handleComplete(Item.id)}
                 ></input>
+             
               </li>
             );
           })}
