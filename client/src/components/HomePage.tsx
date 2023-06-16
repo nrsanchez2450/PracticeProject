@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -150,7 +150,7 @@ function HomePage(): JSX.Element {
 
         <Grid container spacing = {2}>
           <Grid xs={8}>
-            <input
+            <TextField
             type="text"
             placeholder="Enter task"
             value={newItem}

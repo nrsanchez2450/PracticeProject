@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
   background-color: white;
   width: 30%;
   margin: 0 auto;
@@ -30,9 +30,6 @@ input {
 }
 
 .clear-all-btn{
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
   float: right;
   
 }
