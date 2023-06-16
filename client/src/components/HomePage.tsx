@@ -163,7 +163,6 @@ function HomePage(): JSX.Element {
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
         <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
       <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
-      <hr/>
 
         <Grid container spacing = {2}>
           <Grid xs={8}>
@@ -205,6 +204,7 @@ function HomePage(): JSX.Element {
           <hr/>
       </div>
   );
+
 }
 
 export default HomePage;
