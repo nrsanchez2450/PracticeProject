@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Item {
   id: number;
-  body: string;
+  value: string;
   completed: boolean;
 }
 
@@ -110,12 +110,12 @@ function HomePage(): JSX.Element {
       alert(body.id);
       const newItemObject: Item = {
         id: body.id,
-        body: newItem,
+        value: newItem,
         completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-      addToDB(newItemObject.body);
+      addToDB(newItemObject.value);
     }
   };
 
@@ -141,17 +141,17 @@ function HomePage(): JSX.Element {
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
-          {items.map((Item) => {
+          {items.map((item) => {
             return (
-              <li key={Item.id}>
-                 <p className={Item.completed ? "strikethrough" : ""}>
-                {Item.body}
-                {Item.id}
+              <li key={item.id}>
+                 <p className={item.completed ? "strikethrough" : ""}>
+                {item.value}
+                {item.id}
                 </p>
                 <input
                   type="checkbox"
-                  checked = {Item.completed}
-                  onClick={() => handleComplete(Item.id)}
+                  checked = {item.completed}
+                  onClick={() => handleComplete(item.id)}
                 ></input>
              
               </li>
