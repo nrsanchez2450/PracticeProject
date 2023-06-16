@@ -146,16 +146,19 @@ function HomePage(): JSX.Element {
   return (
     <div className="To-Do App">
         <h3> Daily ToDo List</h3>
+        <hr/>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
 
         <Grid container spacing = {2}>
           <Grid xs={8}>
             <TextField
+            fullWidth
             type="text"
-            placeholder="Enter task"
+            placeholder="Enter your task"
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
-          />
+          >
+         </TextField>
           </Grid>
         
         <Grid xs = {4}><Button variant="contained" className = "add-btn" onClick={() => addItem()}>
@@ -183,8 +186,8 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
-      <button className = "logout-btn" type = "submit" onClick={handleSignOut}>Logout</button>
-      <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
+      <Button className = "logout-btn" variant = "text" onClick={handleSignOut}>Logout</Button>
+      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
     </div>
   );
 }
