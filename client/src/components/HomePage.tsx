@@ -159,13 +159,13 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="To-Do App">
+      <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
+      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
         <hr style = {{ background: 'black',
             }}
             />
-        <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
-      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
 
         <Grid container spacing = {2}>
           <Grid xs={8}>
