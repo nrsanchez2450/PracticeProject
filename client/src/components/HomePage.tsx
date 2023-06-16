@@ -150,16 +150,20 @@ function HomePage(): JSX.Element {
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
 
         <Grid container spacing = {2}>
-        <input
-          type="text"
-          placeholder="Enter task"
-          value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
-        />
-        <Button variant="contained" className = "add-btn" onClick={() => addItem()}>
+          <Grid xs={8}>
+            <input
+            type="text"
+            placeholder="Enter task"
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+          />
+          </Grid>
+        
+        <Grid xs = {4}><Button variant="contained" className = "add-btn" onClick={() => addItem()}>
           {" "}
           Add{" "}   
-        </Button>
+        </Button></Grid>
+        
         </Grid>
         <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
 
