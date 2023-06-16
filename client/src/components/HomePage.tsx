@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import {Button} from '@mui/material';
+import { Button } from "@mui/material";
+
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -38,6 +39,25 @@ function HomePage(): JSX.Element {
   }, []);
 
   useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch("/getTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username }),
+      });
+
+      if (response.ok) {
+        const tasks: Item[] = await response.json();
+        setItems(tasks);
+      }
+    }
+    fetchTasks();
+  }, []);
+  
+  
+  useEffect(() => {
     if (!username) {
       navigate("/SignIn");
     }
@@ -52,6 +72,18 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ user: username, body: body }),
     });
   }
+
+
+  function addToDB(body: string) {
+    fetch("/addTask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username, body: body }),
+    });
+  }
+
 
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
@@ -94,6 +126,7 @@ function HomePage(): JSX.Element {
     });
   };
 
+
   const addItem = async () => {
     if (!newItem) {
       return;
@@ -125,7 +158,8 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
       <header className="App-header">
         <h3> Daily ToDo List</h3>
-        
+        <p> {items.length - tasksRemaining} daily tasks left. </p>
+
         <input
           type="text"
           placeholder="Enter task"
@@ -138,22 +172,25 @@ function HomePage(): JSX.Element {
         </Button>
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
-          {items.map((item) => {
+        <ul>
+          {Object.values(items).map((item) => {
             return (
               <li key={item.id}>
-                <p className={item.completed ? "strikethrough" : ""}>
-                  {item.body}
-                  {item.id}
+                 <p className={item.completed ? "strikethrough" : ""}>
+                {item.body}
+                {item.id}
                 </p>
                 <input
                   type="checkbox"
-                  checked={item.completed}
+                  checked = {item.completed}
                   onClick={() => handleComplete(item.id)}
                 ></input>
-                <p> {items.length - tasksRemaining} daily tasks left. </p>
+             
               </li>
             );
           })}
+          </ul>
+
       </header>
       <button type = "submit" onClick={handleSignOut}>Logout</button>
     </div>
