@@ -20,7 +20,7 @@ export default function SignIn() {
     });
     if (response.status === 201) {
       changeUser(username);
-      navigate("/HomePage");
+      navigate("/");
     } else {
       // TODO: Notify user of wrong password or no account
       alert("Incorrect credentials");

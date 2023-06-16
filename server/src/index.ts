@@ -25,14 +25,16 @@ app.get("/users", async (req, res) => {
 app.post("/register", async (req, res) => {
   try {
     const username = req.body.username;
+    console.log("Req Recieved");
     const hashedPass = await bcrypt.hash(req.body.password, 10);
+    console.log("Pass hashed");
     await prisma.user.create({
       data: {
         username: username,
         password: hashedPass,
       },
     });
-    console.log(username, hashedPass);
+    console.log("Prisma completed");
     res.status(201).send();
   } catch {
     res.status(500).send();
@@ -49,7 +51,7 @@ app.post("/login", async (req: Request, res: Response) => {
     return res.status(400).send("Cannot find user");
   }
   if (await bcrypt.compare(user.password, password)) {
-    res.status(403);
+    res.status(403).send("Incorrect Password");
   } else {
     const token: string = jwt.sign(user, process.env.JWT_KEY, {
       expiresIn: "1h",
@@ -58,9 +60,6 @@ app.post("/login", async (req: Request, res: Response) => {
   }
 });
 
-// TODO: Sign out user
-app.post("/logout", async (req, res) => {});
-
 // Fetch Tasks
 app.post("/getTasks", async (req, res) => {
   const user = req.body.username;
@@ -68,22 +67,61 @@ app.post("/getTasks", async (req, res) => {
     where: { username: user },
     select: { task: true },
   });
-  console.log(tasks);
-  res.status(201).json(tasks);
+  res.status(201).send(tasks?.task);
 });
 
+// Add task
 app.post("/addTask", async (req, res) => {
   const taskBody: string = req.body.body;
-  const taskStatus: boolean = req.body.status;
-  const userId: number = req.body.userId;
+  const userId = await prisma.user.findFirst({
+    where: { username: req.body.user },
+    select: { id: true },
+  });
   const newTask = await prisma.task.create({
     data: {
-      userId: userId,
+      userId: userId?.id,
       body: taskBody,
-      completed: taskStatus,
+      completed: false,
     },
   });
   res.send(newTask);
+});
+
+app.post("/clearTasks", async (req, res) => {
+  const userId = await prisma.user.findFirst({
+    where: { username: req.body.user },
+    select: { id: true },
+  });
+  await prisma.task.deleteMany({
+    where: { userId: userId?.id },
+  });
+});
+
+app.put("/updateTask", async (req, res) => {
+  const id = req.body.id;
+  console.log(id);
+  const updatedTask = await prisma.task.update({
+    where: { id: id },
+    data: { completed: true },
+  });
+  res.send(updatedTask);
+});
+
+app.get("/matchId", async (req, res) => {
+  let data = await prisma.task.findFirst({
+    orderBy: {
+      id: "desc",
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (data === null) {
+    console.log("broke");
+    res.json({ id: 0 });
+  } else {
+    res.json(data);
+  }
 });
 
 // Middleware
@@ -117,3 +155,5 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
 app.listen(8080, () => {
   console.log("Server ready at http://localhost:8080");
 });
+
+module.exports = app;

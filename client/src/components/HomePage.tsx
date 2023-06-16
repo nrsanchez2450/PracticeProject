@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
 import { Button } from "@mui/material";
+
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +18,25 @@ function HomePage(): JSX.Element {
   const username = useContext(UserContext);
   const navigate = useNavigate();
   const changeUser = useContext(ChangeUserContext);
+
+  // Loading user's task on login
+  useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch("/getTasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username }),
+      });
+
+      if (response.ok) {
+        const tasks: Item[] = await response.json();
+        setItems(tasks);
+      }
+    }
+    fetchTasks();
+  }, []);
 
   useEffect(() => {
     async function fetchTasks() {
@@ -41,7 +61,17 @@ function HomePage(): JSX.Element {
     if (!username) {
       navigate("/SignIn");
     }
-  }, [username, navigate]);
+  }, [username]);
+
+  function addToDB(body: string) {
+    fetch("/addTask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: username, body: body }),
+    });
+  }
 
 
   function addToDB(body: string) {
@@ -96,7 +126,8 @@ function HomePage(): JSX.Element {
     });
   };
 
-  const addItem = async() => {
+
+  const addItem = async () => {
     if (!newItem) {
       return;
     } else {
@@ -128,6 +159,7 @@ function HomePage(): JSX.Element {
       <header className="App-header">
         <h3> Daily ToDo List</h3>
         <p> {items.length - tasksRemaining} daily tasks left. </p>
+
         <input
           type="text"
           placeholder="Enter task"
@@ -158,6 +190,7 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
+
       </header>
       <button type = "submit" onClick={handleSignOut}>Logout</button>
     </div>
