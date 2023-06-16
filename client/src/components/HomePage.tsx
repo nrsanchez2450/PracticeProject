@@ -202,6 +202,7 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
+          <hr/>
       </div>
   );
 }
