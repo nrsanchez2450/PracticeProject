@@ -206,14 +206,14 @@ function HomePage(): JSX.Element {
         {Object.values(items).map((item) => {
           return (
             <li key={item.id}>
-              <p className={item.completed ? "strikethrough" : ""}>
-                {item.body}
-              </p>
               <input
                 type="checkbox"
                 checked={item.completed}
                 onClick={() => handleComplete(item.id)}
               ></input>
+              <p className={item.completed ? "strikethrough" : ""}>
+                {item.body}
+              </p>
             </li>
           );
         })}
