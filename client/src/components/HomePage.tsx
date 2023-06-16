@@ -74,17 +74,6 @@ function HomePage(): JSX.Element {
   }
 
 
-  function addToDB(body: string) {
-    fetch("/addTask", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: username, body: body }),
-    });
-  }
-
-
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
       let index: Item = { ...item };
