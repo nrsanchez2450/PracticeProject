@@ -3,9 +3,6 @@
   background-color: white;
   width: 30%;
   margin: 0 auto;
-}
-
-.App-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,6 +33,7 @@ input {
   position: absolute;
   bottom: 8px;
   right: 16px;
+  float: right;
   
 }
 
