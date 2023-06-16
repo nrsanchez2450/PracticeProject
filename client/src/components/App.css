@@ -83,6 +83,10 @@ li{
 
 }
 
+hr {
+  border: 1px solid #dfdfdf;
+}
+
 .logout-btn {
   position: absolute;
   top: 8px;

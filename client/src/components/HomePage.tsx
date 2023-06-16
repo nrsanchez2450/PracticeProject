@@ -146,8 +146,10 @@ function HomePage(): JSX.Element {
   return (
     <div className="To-Do App">
         <h3> Daily ToDo List</h3>
-        <hr/>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
+        <Button className = "logout-btn" variant = "text" onClick={handleSignOut}>Logout</Button>
+      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
+      <hr/>
 
         <Grid container spacing = {2}>
           <Grid xs={8}>
@@ -186,9 +188,6 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
-          <hr/>
-      <Button className = "logout-btn" variant = "text" onClick={handleSignOut}>Logout</Button>
-      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
       </div>
   );
 }
