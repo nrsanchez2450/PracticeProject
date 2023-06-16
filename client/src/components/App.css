@@ -33,7 +33,7 @@ hr {
 }
 
 .checkbox {
-  background: #7c3aed;
+  background-color: #7c3aed;
   border-radius: 4px;
   padding: 6px;
   align-items: center;
@@ -43,6 +43,7 @@ hr {
   flex: none;
   order: 0;
   flex-grow: 0;
+  padding: 0;
 }
 
 ul {
@@ -54,7 +55,6 @@ li{
   font-family: 'Inter';
   size: 16px;
   font-weight: 500;
-  position: absolute;
 }
 
 
@@ -74,11 +74,14 @@ li{
 }
 
 .clear-all-btn{
-  float: right;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
+  color: #858585;
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
   
 }
 
