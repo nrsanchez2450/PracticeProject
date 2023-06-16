@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Item {
   id: number;
-  value: string;
+  body: string;
   completed: boolean;
 }
 
@@ -110,12 +110,12 @@ function HomePage(): JSX.Element {
       alert(body.id);
       const newItemObject: Item = {
         id: body.id,
-        value: newItem,
+        body: newItem,
         completed: false,
       };
       setItems((oldList) => [...oldList, newItemObject]);
       setNewItem("");
-      addToDB(newItemObject.value);
+      addToDB(newItemObject.body);
     }
   };
 
@@ -141,11 +141,11 @@ function HomePage(): JSX.Element {
         <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
-          {items.map((item) => {
+          {Object.values(items).map((item) => {
             return (
               <li key={item.id}>
                  <p className={item.completed ? "strikethrough" : ""}>
-                {item.value}
+                {item.body}
                 {item.id}
                 </p>
                 <input
