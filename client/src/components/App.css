@@ -98,3 +98,8 @@ li{
   display: inline-block;
   
 }
+
+hr {
+  border-top: 1px solid black;
+  justify-content: center;
+}

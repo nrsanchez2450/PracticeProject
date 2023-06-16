@@ -161,7 +161,6 @@ function HomePage(): JSX.Element {
     <div className="To-Do App">
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
-        <hr/>
         <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
       <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
 
@@ -196,8 +195,11 @@ function HomePage(): JSX.Element {
                   type="checkbox"
                   checked = {item.completed}
                   onClick={() => handleComplete(item.id)}
-                ></input>
-             
+                  
+                >
+                   <hr/>
+                </input>
+
               </li>
             );
           })}
