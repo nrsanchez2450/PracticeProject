@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 .App {
   text-align: left;
-  background-color: #f9fafb;
+  background-color: white;
   width: 30%;
   margin: 0 auto;
   min-height: 100vh;
@@ -23,7 +23,7 @@
   font-style: normal;
   font-weight: 400;
   color: #6B7280;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
 }
 
 
@@ -74,7 +74,7 @@ li{
 }
 
 .clear-all-btn{
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -98,7 +98,7 @@ li{
   font-size: 16px;
   font-weight: 500;
   color: #858585;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
 
 }
 
@@ -108,7 +108,7 @@ li{
   font-size: 16px;
   line-height: 20px;
   font-weight: 500;
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   top: 8px;
   right: 16px;
