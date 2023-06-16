@@ -32,20 +32,6 @@
 }
 
 
-.checkbox {
-  background: #7c3aed;
-  border-radius: 4px;
-  padding: 6px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  padding: 0;
-}
-
 
 li{
   font-family: 'Inter', sans-serif;
@@ -84,7 +70,6 @@ li{
 .strikethrough {
   text-decoration: line-through;
   border: 1px solid #858585;
-  color: #858585;
 }
 
 .remaining-tasks {
@@ -103,7 +88,6 @@ li{
   position: absolute;
   color: #858585;
   font-size: 16px;
-  line-height: 20px;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
   font-style: normal;
