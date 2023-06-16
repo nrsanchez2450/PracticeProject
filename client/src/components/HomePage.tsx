@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { makeStyles, Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +12,15 @@ interface Item {
   completed: boolean;
 }
 
-
 const useStyles: Function = makeStyles(() => ({
-  button: {
-    position: 'absolute',
+  topRightButton: {
+    position: "absolute",
     top: 8,
+    right: 16,
+  },
+  bottomRightButton: {
+    position: "absolute",
+    bottom: 8,
     right: 16,
   },
 }));
@@ -64,8 +69,7 @@ function HomePage(): JSX.Element {
     }
     fetchTasks();
   }, []);
-  
-  
+
   useEffect(() => {
     if (!username) {
       navigate("/SignIn");
@@ -81,7 +85,6 @@ function HomePage(): JSX.Element {
       body: JSON.stringify({ user: username, body: body }),
     });
   }
-
 
   const handleComplete = (id: number): void => {
     let list: Item[] = items.map((item) => {
@@ -124,7 +127,6 @@ function HomePage(): JSX.Element {
     });
   };
 
-
   const addItem = async () => {
     if (!newItem) {
       return;
@@ -152,63 +154,72 @@ function HomePage(): JSX.Element {
     changeUser("");
   };
 
-
   const classes = useStyles();
-
-
 
   return (
     <div className="To-Do App">
-      <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
-      <Button variant = "text" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
-        <h3> Daily ToDo List</h3>
-        <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
-        <hr style = {{ background: 'black',
-            }}
-            />
+      <Button
+        className={classes.topRightButton}
+        variant="text"
+        onClick={handleSignOut}
+      >
+        Logout
+      </Button>
+      <Button
+        variant="text"
+        className={classes.bottomRightButton}
+        onClick={() => deleteAll()}
+      >
+        Clear All
+      </Button>
+      <h3> Daily ToDo List</h3>
+      <p className="remaining-tasks">
+        {" "}
+        {items.length - tasksRemaining} daily tasks left.{" "}
+      </p>
+      <hr style={{ background: "black" }} />
 
-        <Grid container spacing = {2}>
-          <Grid xs={8}>
-            <TextField
+      <Grid container spacing={2}>
+        <Grid xs={8}>
+          <TextField
             fullWidth
             type="text"
             placeholder="Enter your task"
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
-          >
-         </TextField>
-          </Grid>
-        
-        <Grid xs = {4}><Button variant="contained" className = "add-btn" onClick={() => addItem()}>
-          {" "}
-          Add{" "}   
-        </Button></Grid>
-        
+          ></TextField>
         </Grid>
-        
 
-        <ul>
-          {Object.values(items).map((item) => {
-            return (
-              <li key={item.id}>
-                 <p className={item.completed ? "strikethrough" : ""}>
+        <Grid xs={4}>
+          <Button
+            variant="contained"
+            className="add-btn"
+            onClick={() => addItem()}
+          >
+            {" "}
+            Add{" "}
+          </Button>
+        </Grid>
+      </Grid>
+
+      <ul>
+        {Object.values(items).map((item) => {
+          return (
+            <li key={item.id}>
+              <p className={item.completed ? "strikethrough" : ""}>
                 {item.body}
-                </p>
-                <input
-                  type="checkbox"
-                  checked = {item.completed}
-                  onClick={() => handleComplete(item.id)}
-                  
-                ></input>
-
-              </li>
-            );
-          })}
-          </ul>
-      </div>
-      
+              </p>
+              <input
+                type="checkbox"
+                checked={item.completed}
+                onClick={() => handleComplete(item.id)}
+              ></input>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
-
 }
 
 export default HomePage;
