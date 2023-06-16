@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -149,6 +149,7 @@ function HomePage(): JSX.Element {
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
 
+        <Grid container spacing = {2}>
         <input
           type="text"
           placeholder="Enter task"
@@ -157,8 +158,9 @@ function HomePage(): JSX.Element {
         />
         <Button variant="contained" className = "add-btn" onClick={() => addItem()}>
           {" "}
-          Add{" "}
+          Add{" "}   
         </Button>
+        </Grid>
         <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
