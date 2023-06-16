@@ -3,7 +3,7 @@
 
 .App {
   text-align: left;
-  background-color: white;
+  background-color: #f9fafb;
   width: 30%;
   margin: 0 auto;
   min-height: 100vh;
@@ -16,6 +16,12 @@
   font-weight: 700;
   font-family: 'Noto Sans JP';
   color: #111827;
+}
+
+.list-background {
+  background-color: #ffffff;
+  justify-content: left;
+  align-items: left;
 }
 
 .MuiTextField-root {
