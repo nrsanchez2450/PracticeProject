@@ -159,6 +159,7 @@ function HomePage(): JSX.Element {
 
   return (
     <div className="To-Do App">
+         <hr/>
         <h3> Daily ToDo List</h3>
         <p className="remaining-tasks" > {items.length - tasksRemaining} daily tasks left. </p>
         <Button className = {classes.button} variant = "text" onClick={handleSignOut}>Logout</Button>
@@ -201,7 +202,6 @@ function HomePage(): JSX.Element {
             );
           })}
           </ul>
-          <hr/>
       </div>
   );
 
