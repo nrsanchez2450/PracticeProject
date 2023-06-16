@@ -155,11 +155,11 @@ function HomePage(): JSX.Element {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
         />
-        <Button variant="contained" onClick={() => addItem()}>
+        <Button variant="contained" className = "add-btn" onClick={() => addItem()}>
           {" "}
           Add{" "}
         </Button>
-        <Button variant = "outlined" onClick={() => deleteAll()}>Clear All</Button>
+        <Button variant = "outlined" className = "clear-all-btn" onClick={() => deleteAll()}>Clear All</Button>
 
         <ul>
           {Object.values(items).map((item) => {
@@ -167,7 +167,6 @@ function HomePage(): JSX.Element {
               <li key={item.id}>
                  <p className={item.completed ? "strikethrough" : ""}>
                 {item.body}
-                {item.id}
                 </p>
                 <input
                   type="checkbox"

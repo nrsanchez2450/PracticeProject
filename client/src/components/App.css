@@ -33,14 +33,14 @@ input {
 
 }
 
-.MuiButton-contained {
+.add-btn {
     background: #ffffff;
     margin-left: 230px;
     display:grid;
     grid-template-columns: auto;
 }
 
-.MuiButton-outlined{
+.clear-all-btn{
   position: absolute;
   bottom: 8px;
   right: 16px;
