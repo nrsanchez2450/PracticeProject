@@ -12,16 +12,20 @@ interface Item {
   completed: boolean;
 }
 
+
+ 
 const useStyles: Function = makeStyles(() => ({
   topRightButton: {
     position: "absolute",
     top: 8,
     right: 16,
+    color: "#858585",
   },
   bottomRightButton: {
     position: "absolute",
     bottom: 8,
     right: 16,
+    color: "#858585",
   },
 }));
 
@@ -156,6 +160,8 @@ function HomePage(): JSX.Element {
 
   const classes = useStyles();
 
+
+
   return (
     <div className="To-Do App">
       <Button
@@ -177,7 +183,14 @@ function HomePage(): JSX.Element {
         {" "}
         {items.length - tasksRemaining} daily tasks left.{" "}
       </p>
-      <hr style={{ background: "black" }} />
+      <hr 
+        style = {{
+          background: "#DFDFDF",
+          height: "1px",
+          border: "none",
+        }}
+        />
+      
 
       <Grid container spacing={2}>
         <Grid xs={8}>

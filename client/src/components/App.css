@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
-body {
-  background-color: #f9fafb;
-}
+
 
 .App {
   text-align: left;
@@ -40,7 +38,7 @@ li {
   font-weight: 500;
 }
 
-.add-btn {
+.MuiTextField-contained {
   color: #ffffff;
   background: #7c3aed;
   border: 1px solid #7c3aed;
@@ -55,17 +53,6 @@ li {
   position: relative;
 }
 
-.clear-all-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  color: #858585;
-  display: inline-block;
-}
 
 .strikethrough {
   text-decoration: line-through;
@@ -83,14 +70,3 @@ li {
   font-family: "Inter";
 }
 
-.logout-btn {
-  position: absolute;
-  top: 8px;
-  right: 16px;
-  color: #858585;
-  font-size: 16px;
-  font-weight: 500;
-  font-family: "Inter";
-  font-style: normal;
-  display: inline-block;
-}
