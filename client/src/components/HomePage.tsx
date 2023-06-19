@@ -4,6 +4,8 @@ import { Button, Divider, Grid, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import Typography from '@mui/material/Typography';
+import {createTheme, ThemeProvider} from '@mui/material';
 
 interface Item {
   id: number;
@@ -17,24 +19,12 @@ const useStyles: Function = makeStyles(() => ({
   topRightButton: {
     position: "absolute",
     top: 8,
-    right: -240,
-    color: "#858585",
+    right: -480,
   },
   bottomRightButton: {
     position: "absolute",
-    bottom: -760,
-    right: -230,
-    backgroundColor: "#858585",
-  },
-  addButton: {
-    color: "#ffffff",
-    backgroundColor: "#7c3aed",
-    border: "1px solid #7c3aed",
-    position: "relative",
-    gap: 8,
-    borderRadius: 8,
-    boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
-    cursor: "pointer",
+    bottom: -690,
+    right: -350,
   },
 }));
 
@@ -169,33 +159,44 @@ function HomePage(): JSX.Element {
 
   const classes = useStyles();
 
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Noto Sans JP", "sans-serif"].join(","),
+  },
+});
 
 
   return (
     <div id = "root">
     <div className="To-Do App">
+      <Typography component="div">
       <Button
         className={classes.topRightButton}
         variant="text"
+        sx= {{color: '#858585', textTransform: "capitalize"}}
         onClick={handleSignOut}
       >
         Logout
       </Button>
+
       <Button
         variant="text"
+        sx= {{color: '#858585', textTransform: "capitalize"}}
         className={classes.bottomRightButton}
         onClick={() => deleteAll()}
-      >
-        Clear All
+      >Clear All
       </Button>
-      <h3> Daily ToDo List</h3>
+
+      <ThemeProvider theme = {theme}>
+      <Typography variant = "h3" gutterBottom sx= {{color: '#111827'}}> Daily ToDo List</Typography>
+      </ThemeProvider>
       <p className="remaining-tasks">
         {" "}
         {items.length - tasksRemaining} daily tasks left.{" "}
       </p>
       
 
-      <Grid container spacing={2}>
+      <Grid container spacing={0}>
         <Grid xs={8}>
           <TextField
             fullWidth
@@ -209,7 +210,7 @@ function HomePage(): JSX.Element {
         <Grid xs={4}>
           <Button
             variant="contained"
-            className= {classes.addButton}
+            sx= {{backgroundColor: '#7C3AED', border: 1, borderRadius: 8, borderColor: '#7C3AED', textTransform: 'capitalize'}}
             onClick={() => addItem()}
           >
             {" "}
@@ -217,6 +218,7 @@ function HomePage(): JSX.Element {
           </Button>
         </Grid>
       </Grid>
+      </Typography>
 
       <ul>
         {Object.values(items).map((item) => {
