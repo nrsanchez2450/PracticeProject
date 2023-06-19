@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./App.css";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Divider, Grid, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-
 import { ChangeUserContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -18,14 +17,24 @@ const useStyles: Function = makeStyles(() => ({
   topRightButton: {
     position: "absolute",
     top: 8,
-    right: 16,
+    right: -240,
     color: "#858585",
   },
   bottomRightButton: {
     position: "absolute",
-    bottom: 8,
-    right: 16,
-    color: "#858585",
+    bottom: -760,
+    right: -230,
+    backgroundColor: "#858585",
+  },
+  addButton: {
+    color: "#ffffff",
+    backgroundColor: "#7c3aed",
+    border: "1px solid #7c3aed",
+    position: "relative",
+    gap: 8,
+    borderRadius: 8,
+    boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+    cursor: "pointer",
   },
 }));
 
@@ -74,11 +83,11 @@ function HomePage(): JSX.Element {
     fetchTasks();
   }, []);
 
-  useEffect(() => {
-    if (!username) {
-      navigate("/SignIn");
-    }
-  }, [username]);
+  // useEffect(() => {
+  //   if (!username) {
+  //     navigate("/SignIn");
+  //   }
+  // }, [username]);
 
   function addToDB(body: string) {
     fetch("/addTask", {
@@ -163,6 +172,7 @@ function HomePage(): JSX.Element {
 
 
   return (
+    <div id = "root">
     <div className="To-Do App">
       <Button
         className={classes.topRightButton}
@@ -183,13 +193,6 @@ function HomePage(): JSX.Element {
         {" "}
         {items.length - tasksRemaining} daily tasks left.{" "}
       </p>
-      <hr 
-        style = {{
-          background: "#DFDFDF",
-          height: "1px",
-          border: "none",
-        }}
-        />
       
 
       <Grid container spacing={2}>
@@ -206,7 +209,7 @@ function HomePage(): JSX.Element {
         <Grid xs={4}>
           <Button
             variant="contained"
-            className="add-btn"
+            className= {classes.addButton}
             onClick={() => addItem()}
           >
             {" "}
@@ -231,6 +234,8 @@ function HomePage(): JSX.Element {
           );
         })}
       </ul>
+        <Divider></Divider>
+      </div>
     </div>
   );
 }
